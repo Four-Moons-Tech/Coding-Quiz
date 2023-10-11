@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css" />
-    <title>Quiz</title>
+    <title>Coding Quiz Challenge</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class= "card timer">
+               <div class = "timer-text">
+               <div class="timer-count">60</div>
+               <h3>seconds remaining</h3>
+               </div>
+            </div> 
+        </nav>
+    </header>
+
     <div class="quiz">
         <!--start-->
         <div class="quiz-question" Data-quiz="start-quiz" data-state="hidden">
-            <h2>Coding Quiz challenge</h2>
-            <h3>Try to answer the following code-related questions under 60 seconds</h3>
+            <h2>Coding Quiz Challenge</h2>
+            <h3>Try to answer the following code-related questions within the time limit. Keep in mind that the wrong answer will penalize your score/time by 10 seconds!</h3>
             <button type="start">Start Quiz</button>
         </div>
         <!--1 data-question-->
@@ -56,7 +67,7 @@
         </div>
         <!--5 data-question-->
         <div class="quiz-question" Data-quiz="question5" data-state="hidden">
-            <h2>A very useful tool in development and debugging for printing content to the debugger</h2>
+            <h2>A very useful tool used during development and debugging for printing content to the debugger is:</h2>
             <ul class="button-group">
                 <button type="answer">1. JavaScript</button>
                 <button type="answer">2. Terminal/Bash</button>
@@ -67,19 +78,21 @@
         <!--Final Score-->
         <div class="quiz-question" Data-quiz="final score" data-state="hidden">
             <h2>All Done!</h2>
-            <h3>Final Score</h3>
+            <h3>Your final score: <span class="score"> 0 </span></h3>
             <label for="enter-initials">Enter Initials</label>
             <textarea name="enter-initials" cols="20" rows="1"></textarea>
+            <button type="submit">Submit</button>
         </div> 
-        <!--Final Score Display-->
-        <div class="quiz-question" Data-quiz="result" data-state="hidden">
-            <h2>High Score</h2>
-            <h3>Score:<span class="win">0 </span></h3>
+        <!--High Score-->
+        <div class="quiz-question" Data-quiz="high score" data-state="hidden">
+            <h2>High Scores</h2>
+            <ul id="high-score-list"></ul>
             <ul class="button-nav">
                 <button type="nav">Go Back</button>
                 <button type="nav">Clear High Score</button>
             </ul>
-        </div> 
+        </div>
+        <h3 class="message"></h3> 
       </div>
       <script src="./assets/js/script.js"></script>
 </body>
