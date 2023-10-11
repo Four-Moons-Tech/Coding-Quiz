@@ -1,0 +1,24 @@
+body {
+    text-align: center;
+}
+
+ul.button-group {
+    justify-content: center;
+    margin: 16px 40px 16px 40px;
+    padding: 16px 40px 16px 40px;
+    justify-content: center;
+}
+
+.button-group button{
+    background-color: #550ea5; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 50%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+}
+
+.button-group button:hover {
+    background-color: #3e8e41;
+}

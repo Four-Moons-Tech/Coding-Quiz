@@ -3,33 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Quiz</title>
 </head>
 <body>
     <div class="quiz">
         <!--start-->
-        <div class="quiz-question" Data-quiz="start-quiz" data-state="visible">
+        <div class="quiz-question" Data-quiz="start-quiz" data-state="hidden">
             <h2>Coding Quiz challenge</h2>
-            <h3>Try to answer the following code-related qiestions under 60 seconds</h3>
-            <button style="start">Start Quiz</button>
+            <h3>Try to answer the following code-related questions under 60 seconds</h3>
+            <button type="start">Start Quiz</button>
         </div>
         <!--1 data-question-->
         <div class="quiz-question" Data-quiz="question1" data-state="hidden">
             <h2>Commonly Used Data Type DO NOT Inlude</h2>
-            <button style="answer">1. strings</button>
-            <button style="answer">2. bouleans</button>
-            <button style="answer">3. alerts</button>
-            <button style="answer">4. numbers</button>
+            <ul class="button-group">
+                <button type="answer1">1. strings</button>
+                <button type="answer">2. bouleans</button>
+                <button type="answer">3. alerts</button>
+                <button type="answer">4. numbers</button>
+            </ul>
         </div>
         <!--2 data-question-->
         <div class="quiz-question" Data-quiz="question2" data-state="hidden">
             <h2>Condition in If Statement enclosed in _____ brackets</h2>
-            <button style="answer">1. curly Brackets</button>
-            <button style="answer">2. square Brackets</button>
-            <button style="answer">3. parenthesis</button>
-            <button style="answer">4. commas</button>
+            <ul class="button-group">
+                <button type="answer">1. curly brackets</button>
+                <button type="answer">2. square brackets</button>
+                <button type="answer">3. parenthesis</button>
+                <button type="answer">4. commas</button>
+            </ul>
         </div>
-          
+        <!--3 data-question-->
+        <div class="quiz-question" Data-quiz="question3" data-state="hidden">
+            <h2>A string mustbe enclosed within _______ when being assigned to a variable</h2>
+            <ul class="button-group">
+                <button type="answer">1. curly brackets</button>
+                <button type="answer">2. square brackets</button>
+                <button type="answer">3. parenthesis</button>
+                <button type="answer">4. commas</button>
+            </ul>
+        </div>
+        <!--4 data-question-->
+        <div class="quiz-question" Data-quiz="question4" data-state="hidden">
+            <h2>Arrays in JavaScript can be used to store:</h2>
+            <ul class="button-group">
+                <button type="answer">1. numbers and strings</button>
+                <button type="answer">2. other arrays</button>
+                <button type="answer">3. boolean</button>
+                <button type="answer">4. all of the above</button>
+            </ul>
+        </div>
+        <!--5 data-question-->
+        <div class="quiz-question" Data-quiz="question5" data-state="hidden">
+            <h2>A very useful tool in development and debugging for printing content to the debugger</h2>
+            <ul class="button-group">
+                <button type="answer">1. JavaScript</button>
+                <button type="answer">2. Terminal/Bash</button>
+                <button type="answer">3. for loops</button>
+                <button type="answer">4. console.log</console></button>
+            </ul>
+        </div>  
+        <!--Final Score-->
+        <div class="quiz-question" Data-quiz="final score" data-state="hidden">
+            <h2>All Done!</h2>
+            <h3>Final Score</h3>
+            <label for="enter-initials">Enter Initials</label>
+            <textarea name="enter-initials" cols="20" rows="1"></textarea>
+        </div> 
+        <!--Final Score Display-->
+        <div class="quiz-question" Data-quiz="result" data-state="hidden">
+            <h2>High Score</h2>
+            <h3>Score:<span class="win">0 </span></h3>
+            <ul class="button-nav">
+                <button type="nav">Go Back</button>
+                <button type="nav">Clear High Score</button>
+            </ul>
+        </div> 
       </div>
       <script src="./assets/js/script.js"></script>
 </body>
