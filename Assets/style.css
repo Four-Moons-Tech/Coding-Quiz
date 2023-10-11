@@ -4,6 +4,9 @@ body {
 h2 {
     font-size: 36px;
 }
+header h3{
+    float: left;
+}
 
 nav {
     float: right;
@@ -59,8 +62,13 @@ button:hover{
 
 textarea {
     border-color: #550ea5;
+    background-color: #b7a1d0;
     border-width: 2px;
 }
 #high-score-list {
     background-color: #b7a1d0;
+}
+
+label{
+    font-size: 20px;
 }
