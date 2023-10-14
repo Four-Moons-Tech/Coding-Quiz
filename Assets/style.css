@@ -1,6 +1,9 @@
 body {
     text-align: center;
 }
+header {
+    min-height: 80px;
+}
 h2 {
     font-size: 36px;
 }
@@ -11,12 +14,17 @@ header h3{
 nav {
     float: right;
 }
+
 div.timer-count {
     font-size: 48;
     font-family: Arial, Helvetica, sans-serif;
     color:rgb(113, 2, 2);
+    padding: 15px;
 }
 
+div.quiz {
+    padding-top: 60px;
+}
 ul.button-group {
     justify-content: center;
     margin-left: 120px;
