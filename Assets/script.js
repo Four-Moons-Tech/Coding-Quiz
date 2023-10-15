@@ -12,23 +12,63 @@
 var quizQuestion = document.querySelectorAll(".quiz-question");
 var startButton = document.querySelector('#start');// var for start button using id
 var secondsLeft;
+var quizScore = 10;
+var numberOfQuestions = 5;
+var question1 = document.getElementById('question1');
 
 $(document).ready(function(){
-    $(quizQuestion).hide()//Hiding all quiz questions classes//
-})
+  $(quizQuestion).hide()//Hiding all quiz questions classes//
+  })
 
-function startQuiz() {//function to start the quiz
+var instruction = document.querySelector('.start-quiz');
+
+var firstChoice1 = document.getElementById('answer1.1'); // strings
+var secondChoice1 = document.getElementById('answer1.2');// bouleans
+var thirdChoice1 = document.getElementById('answer1.3'); // alerts
+var fourthChoice1 =document.getElementById('answer1.4'); // numbers
+
+
+
+
+
+    //question1 = (firstChoice1=false,secondChoice1 = false,thirdChoice1 = true,fourthChoice1 = false); 
+ var buttonGroup = document.querySelectorAll('.button-group');
+ var answerButtons =buttonGroup.children;
+
+//buttonGroup.addEventListener('click', function(event) {
+  //if (event.target.classList.contains('child')) {
+  //  console.log('Clicked on child element');
+ 
+    
+
+
+
+ startButton.addEventListener("click", startQuiz);
+
+function startQuiz() { //function to start the quiz
   secondsLeft = 45;
+  $(instruction).hide();
   setTime()
-}
+  $(question1).show();
   
+}
+firstChoice1.addEventListener('click', displayMessageCorrect);
 
+//if(userInput1 = firstChoice1 || secondChoice1 || fourthChoice1){
+  //alert ("Wrong");
+//} else alert ('Correct')
+//userInput1()
+
+  // var userInput1 = function() {
+  //   for (var i=0; i<=answerButtons.length, i++);
+  //   answerButtons [i].addEventListener('click', userInput1);
+      
+    
+//console.log(userInput1)
+
+//Timer
 var timeEl =document.querySelector('.timer-count')
-
-//
-
 function setTime() {
-  // Sets interval in variable
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
@@ -43,9 +83,21 @@ function setTime() {
   }, 1000);
 }
 
-//setTime();
+//var state = element.getAttribute("data-state")
 
-  
-  startButton.addEventListener("click", startQuiz); 
+
+  //Event listener to start the quiz
+   
 
   //resetButton.addEventListener("click", resetGame);
+  //firstChoice.addEventListener('click', )
+
+function displayMessageCorrect() {
+  alert('correct')
+}
+var finalScore = function (){
+  finalScore =''
+  if (userInput1= thirdChoice1){
+
+  }
+}
