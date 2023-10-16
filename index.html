@@ -30,54 +30,58 @@
         <div class="quiz-question" id="question1">
             <h2>Commonly used data types DO Not Include:</h2>
             <ul class="button-group">
-                <button id="answer1.1">1. strings</button>
-                <button id="answer1.2">2. bouleans</button>
-                <button id="answer1.3">3. alerts</button>
-                <button id="answer1.4">4. numbers</button>
+                <button class =btn id="answer1.1" data-button ="1" data-type='wrong'>1. strings</button>
+                <button class =btn id="answer1.2" data-button ="1" data-type='wrong'>2. bouleans</button>
+                <button class =btn id="answer1.3" data-button ="1" data-type='correct'>3. alerts</button>
+                <button class =btn id="answer1.4" data-button ="1" data-type='wrong'>4. numbers</button>
             </ul>
+            <div class="message" data-message="" data-score ="score" data-state="hidden"></div>
         </div>
         <!--2 data-question-->
-        <div class="quiz-question" Data-quiz="question2" data-state="hidden">
+        <div class="quiz-question" id="question2" data-state="hidden">
             <h2>Condition in If Statement enclosed in _____ brackets.</h2>
             <ul class="button-group">
-                <button id="answer2.1">1. curly brackets</button>
-                <button id="answer2.2">2. square brackets</button>
-                <button id="answer2.3">3. parenthesis</button>
-                <button id="answer2.4">4. commas</button>
+                <button class =btn data-button ="2" id="answer2.1" data-type='wrong'>1. curly brackets</button>
+                <button class =btn data-button ="2" id="answer2.2"data-type='wrong'>2. square brackets</button>
+                <button class =btn data-button ="2" id="answer2.3"data-type='wrong'>3. parenthesis</button>
+                <button class =btn data-button ="2" id="answer2.4"data-type='correct'>4. commas</button>
             </ul>
         </div>
         <!--3 data-question-->
-        <div class="quiz-question" Data-quiz="question3" data-state="hidden">
+        <div class="quiz-question" id="question3" data-state="hidden">
             <h2>String values must be enclosed within________ when being assigned to variables.</h2>
             <ul class="button-group">
-                <button id="answer3.1">1. curly brackets</button>
-                <button id="answer3.2">2. square brackets</button>
-                <button id="answer3.3">3. parenthesis</button>
-                <button id="answer3.4">4. commas</button>
+                <button class =btn data-button ="3"id="answer3.1"data-type='wrong'>1. curly brackets</button>
+                <button class =btn data-button ="3"id="answer3.2"data-type='wrong'>2. square brackets</button>
+                <button class =btn data-button ="3"id="answer3.3"data-type='wrong'>3. parenthesis</button>
+                <button class =btn data-button ="3"id="answer3.4"data-type='correct'>4. commas</button>
+                
             </ul>
+            <div class="message" data-message="" data-score ="score" data-state="hidden"></div>
+
         </div>
         <!--4 data-question-->
-        <div class="quiz-question" data-quiz="question4" data-state="hidden">
+        <div class="quiz-question" id="question4" data-state="hidden">
             <h2>Arrays in JavaScript can be used to store:</h2>
             <ul class="button-group">
-                <button id="answer">1. numbers and strings</button>
-                <button id="answer">2. other arrays</button>
-                <button id="answer">3. boolean</button>
-                <button id="answer">4. all of the above</button>
+                <button class =btn data-button ="4"id="answer"data-type='wrong'>1. numbers and strings</button>
+                <button class =btn data-button ="4"id="answer"data-type='wrong'>2. other arrays</button>
+                <button class =btn data-button ="4"id="answer"data-type='wrong'>3. boolean</button>
+                <button class =btn data-button ="4"id="answer"data-type='correct'>4. all of the above</button>
             </ul>
         </div>
         <!--5 data-question-->
-        <div class="quiz-question" data-quiz="question5" data-state="hidden">
+        <div class="quiz-question" id="question5" data-state="hidden">
             <h2>A very useful tool used during development and debugging for printing content to the debugger is:</h2>
             <ul class="button-group">
-                <button type="answer">1. JavaScript</button>
-                <button type="answer">2. Terminal/Bash</button>
-                <button type="answer">3. for loops</button>
-                <button type="answer">4. console.log</console></button>
+                <button class =btn data-button ="5">1. JavaScript</button>
+                <button class =btn data-button ="5">2. Terminal/Bash</button>
+                <button class =btn data-button ="5">3. for loops</button>
+                <button class =btn data-button ="5">4. console.log</button>
             </ul>
         </div>  
         <!--Final Score-->
-        <div class="quiz-question" data-quiz="final score" data-state="hidden">
+        <div class="quiz-question final-score"data-quiz="final score" data-state="hidden">
             <h2>All Done!</h2>
             <h3>Your final score: <span class="score"> 0 </span></h3>
             <label for="enter-initials">Enter Initials</label>

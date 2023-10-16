@@ -12,9 +12,19 @@
 var quizQuestion = document.querySelectorAll(".quiz-question");
 var startButton = document.querySelector('#start');// var for start button using id
 var secondsLeft;
-var quizScore = 10;
+var scoreCounter = 20;
 var numberOfQuestions = 5;
 var question1 = document.getElementById('question1');
+var question2 = document.getElementById('question2');
+var question3 = document.getElementById('question3');
+var question4 = document.getElementById('question4');
+var question5 = document.getElementById('question5');
+var answer = document.querySelectorAll('.btn');
+//var finalScore = document.querySelector('.score'); 
+var finalScore=document.querySelector('.final-score');
+var timerInterval;
+
+
 
 $(document).ready(function(){
   $(quizQuestion).hide()//Hiding all quiz questions classes//
@@ -22,18 +32,10 @@ $(document).ready(function(){
 
 var instruction = document.querySelector('.start-quiz');
 
-var firstChoice1 = document.getElementById('answer1.1'); // strings
-var secondChoice1 = document.getElementById('answer1.2');// bouleans
-var thirdChoice1 = document.getElementById('answer1.3'); // alerts
-var fourthChoice1 =document.getElementById('answer1.4'); // numbers
-
-
-
-
-
-    //question1 = (firstChoice1=false,secondChoice1 = false,thirdChoice1 = true,fourthChoice1 = false); 
- var buttonGroup = document.querySelectorAll('.button-group');
- var answerButtons =buttonGroup.children;
+//var firstChoice1 = document.getElementById('answer1.1'); // strings
+//var secondChoice1 = document.getElementById('answer1.2');// bouleans
+//var thirdChoice1 = document.getElementById('answer1.3'); // alerts
+//var fourthChoice1 =document.getElementById('answer1.4'); // numbers
 
 //buttonGroup.addEventListener('click', function(event) {
   //if (event.target.classList.contains('child')) {
@@ -52,24 +54,72 @@ function startQuiz() { //function to start the quiz
   $(question1).show();
   
 }
-firstChoice1.addEventListener('click', displayMessageCorrect);
+//answer.addEventListener('click', )
+  
+//finalScore = ''
+// function calcScore(){
+//   if (answertype==='correct'){
+//     finalScore=+20; 
+//   } else finalScore=-20; 
 
-//if(userInput1 = firstChoice1 || secondChoice1 || fourthChoice1){
-  //alert ("Wrong");
-//} else alert ('Correct')
+
+//var buttons = document.querySelectorAll('.btn');
+//firstChoice1.addEventListener('click', function(buttons));
+answer.forEach(function(button){
+  button.addEventListener('click', function(event){
+    console.log(this);
+    console.log(event.target)
+
+    if(this.getAttribute('data-button')==1){
+      $(instruction).hide();
+      $(question1).hide();
+      $(question2).show();
+    } else if (this.getAttribute('data-button')==2){
+      $(question2).hide();
+      $(question3).show();
+    } else if (this.getAttribute('data-button')==3){
+      $(question3).hide();
+      $(question4).show();
+    } else if (this.getAttribute('data-button')==4){
+      $(question4).hide();
+      $(question5).show();
+    } else if (this.getAttribute('data-button')==5){
+      $(question5).hide(); 
+      $(finalScore).show();
+      clearInterval(timerInterval);
+    }
+
+    
+
+   });
+  });
+   //buttons = (firstChoice1,secondChoice1,thirdChoice1,fourthChoice1);
+   //$(question1).hide();
+   //$(question2).show();
+   //if(buttons = firstChoice1 || secondChoice1 || fourthChoice1){
+   //alert ("Wrong answer")
+
+//} //else alert ('Correct')
+
+
+//secondChoice1.addEventListener('click', displayMessageWrong);
+//thirdChoice1.addEventListener('click', displayMessageCorrect);
+//fourthChoice1.addEventListener('click', displayMessageWrong);
+
+
 //userInput1()
 
-  // var userInput1 = function() {
+  //var userInput1 = function() {
   //   for (var i=0; i<=answerButtons.length, i++);
-  //   answerButtons [i].addEventListener('click', userInput1);
-      
-    
-//console.log(userInput1)
+  //  answerButtons [i].addEventListener('click', userInput1);
+  // }   
+
 
 //Timer
 var timeEl =document.querySelector('.timer-count')
+
 function setTime() {
-  var timerInterval = setInterval(function() {
+  timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
 
@@ -83,21 +133,36 @@ function setTime() {
   }, 1000);
 }
 
-//var state = element.getAttribute("data-state")
+
+//answerButtons.addEventListener('click', userInput1)
 
 
-  //Event listener to start the quiz
+
+ 
    
 
   //resetButton.addEventListener("click", resetGame);
   //firstChoice.addEventListener('click', )
+var message = document.querySelectorAll('.message')
+//var state = message.getAttribute("data-state")
 
-function displayMessageCorrect() {
-  alert('correct')
-}
-var finalScore = function (){
-  finalScore =''
-  if (userInput1= thirdChoice1){
+//function displayMessageCorrect() {
+   //message = "Correct";
+   //state.setAttribute('data-state', 'visible'); 
+  //alert('Correct')
+//}
 
-  }
-}
+//function displayMessageWrong() {
+ //alert('Wrong')
+//}
+//calculate final score
+
+//function calculateFinalScore(){
+//   var finalScore = ''
+//   var answertype = element.getAttribute("data-type");
+//   if (answertype==='correct'){
+//   finalScore= ++20;
+// } else {
+//   finalScore = --20;
+// }
+// })
