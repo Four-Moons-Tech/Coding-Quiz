@@ -12,17 +12,25 @@
 var quizQuestion = document.querySelectorAll(".quiz-question");
 var startButton = document.querySelector('#start');// var for start button using id
 var secondsLeft;
-var scoreCounter = 20;
+var scoreCounter = 0;
 var numberOfQuestions = 5;
 var question1 = document.getElementById('question1');
 var question2 = document.getElementById('question2');
 var question3 = document.getElementById('question3');
 var question4 = document.getElementById('question4');
 var question5 = document.getElementById('question5');
-var answer = document.querySelectorAll('.btn');
-//var finalScore = document.querySelector('.score'); 
+var answer = document.querySelectorAll('.btn'); 
 var finalScore=document.querySelector('.final-score');
+var highScores = document.querySelector('.score-list');
 var timerInterval;
+var submitButton = document.getElementById('submit'); 
+var initial = document.querySelector('#initials');
+initial = initial.value; 
+//initialsText=initials.textContent; 
+var score = document.querySelector('.score').textContent;
+var scoreList=document.getElementById('high-score-list');
+//yourScore.textContent = count; 
+//var storeScore = count + initials; 
 
 
 
@@ -31,11 +39,6 @@ $(document).ready(function(){
   })
 
 var instruction = document.querySelector('.start-quiz');
-
-//var firstChoice1 = document.getElementById('answer1.1'); // strings
-//var secondChoice1 = document.getElementById('answer1.2');// bouleans
-//var thirdChoice1 = document.getElementById('answer1.3'); // alerts
-//var fourthChoice1 =document.getElementById('answer1.4'); // numbers
 
 //buttonGroup.addEventListener('click', function(event) {
   //if (event.target.classList.contains('child')) {
@@ -63,12 +66,24 @@ function startQuiz() { //function to start the quiz
 //   } else finalScore=-20; 
 
 
-//var buttons = document.querySelectorAll('.btn');
-//firstChoice1.addEventListener('click', function(buttons));
+
 answer.forEach(function(button){
   button.addEventListener('click', function(event){
-    console.log(this);
-    console.log(event.target)
+    //console.log(this);
+    //console.log(event.target)
+    if (this.getAttribute('data-type')=='correct'){
+      scoreCounter+=20; 
+      console.log("correct", scoreCounter)
+    } else if (this.getAttribute('data-type')=='wrong'){
+      scoreCounter-=10
+      secondsLeft-=10
+        if (secondsLeft <=0){
+          clearInterval(timerInterval);
+          alert('No time left')
+        }
+      console.log("wrong", scoreCounter, secondsLeft)
+      timeEl.setAttribute('timer-count', secondsLeft);
+    }
 
     if(this.getAttribute('data-button')==1){
       $(instruction).hide();
@@ -87,12 +102,35 @@ answer.forEach(function(button){
       $(question5).hide(); 
       $(finalScore).show();
       clearInterval(timerInterval);
-    }
-
-    
-
+    } 
    });
   });
+ 
+  function submitInitials(event){
+    event.preventDefault();
+    //console.log(event);
+    localStorage.setItem('initials', initials,)
+    localStorage.setItem('score', score,)
+    //console.log(score, initials)
+    $(finalScore).hide();
+    $(highScores).show();
+  }
+ 
+  submitButton.addEventListener('click', submitInitials, addScoreItem,)//Submit button
+
+
+var scoreListItem = [score + initials]
+//console.log("scoreListItem")
+function addScoreItem(event){
+  event.preventDefault();
+  
+    if(initials.length > 0){
+      scoreList.append('<li>'+ initials + score+'</li>');
+    } else {
+        alert("Input?")
+    }
+}
+
    //buttons = (firstChoice1,secondChoice1,thirdChoice1,fourthChoice1);
    //$(question1).hide();
    //$(question2).show();

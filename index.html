@@ -51,11 +51,10 @@
         <div class="quiz-question" id="question3" data-state="hidden">
             <h2>String values must be enclosed within________ when being assigned to variables.</h2>
             <ul class="button-group">
-                <button class =btn data-button ="3"id="answer3.1"data-type='wrong'>1. curly brackets</button>
-                <button class =btn data-button ="3"id="answer3.2"data-type='wrong'>2. square brackets</button>
-                <button class =btn data-button ="3"id="answer3.3"data-type='wrong'>3. parenthesis</button>
-                <button class =btn data-button ="3"id="answer3.4"data-type='correct'>4. commas</button>
-                
+                <button class =btn data-button ="3"id="answer3.1"data-type='wrong'>1. commas</button>
+                <button class =btn data-button ="3"id="answer3.2"data-type='wrong'>2. curly brackets</button>
+                <button class =btn data-button ="3"id="answer3.3"data-type='correct'>3. quotes</button>
+                <button class =btn data-button ="3"id="answer3.4"data-type='wrong'>4. parenthesis</button>
             </ul>
             <div class="message" data-message="" data-score ="score" data-state="hidden"></div>
 
@@ -69,27 +68,34 @@
                 <button class =btn data-button ="4"id="answer"data-type='wrong'>3. boolean</button>
                 <button class =btn data-button ="4"id="answer"data-type='correct'>4. all of the above</button>
             </ul>
+            <div class="message" data-message="" data-score ="score" data-state="hidden"></div>
         </div>
         <!--5 data-question-->
         <div class="quiz-question" id="question5" data-state="hidden">
             <h2>A very useful tool used during development and debugging for printing content to the debugger is:</h2>
             <ul class="button-group">
-                <button class =btn data-button ="5">1. JavaScript</button>
-                <button class =btn data-button ="5">2. Terminal/Bash</button>
-                <button class =btn data-button ="5">3. for loops</button>
-                <button class =btn data-button ="5">4. console.log</button>
+                <button class =btn data-button ="5" data-type='wrong'>1. JavaScript</button>
+                <button class =btn data-button ="5" data-type='wrong'>2. Terminal/Bash</button>
+                <button class =btn data-button ="5" data-type='wrong'>3. for loops</button>
+                <button class =btn data-button ="5" data-type='correct'>4. console.log</button>
             </ul>
+            <div class="message" data-message="" data-score ="score" data-state="hidden"></div>
         </div>  
         <!--Final Score-->
         <div class="quiz-question final-score"data-quiz="final score" data-state="hidden">
             <h2>All Done!</h2>
             <h3>Your final score: <span class="score"> 0 </span></h3>
-            <label for="enter-initials">Enter Initials</label>
-            <textarea name="enter-initials" cols="20" rows="1"></textarea>
-            <button type="submit">Submit</button>
+            <label id="enter-initials">Enter Initials</label>
+            <input type="text" name="textName"id="initials" placeholder="Enter your initials" cols="20" rows="1">
+            <button id="submit">Submit</button>
         </div> 
+        <div id="dialog" title="Dialog">
+            <p>
+              Please enter your initials!
+            </p>
+          </div>
         <!--High Score-->
-        <div class="quiz-question" data-quiz="high score" data-state="hidden">
+        <div class="quiz-question score-list" data-quiz="high score" data-state="hidden">
             <h2>High Scores</h2>
             <ul id="high-score-list"></ul>
             <ul class="button-nav">
@@ -105,6 +111,13 @@
      <!-- Your JavaScript file -->
     <script type="text/javascript" src="Assets/script.js">
     </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+          $('#dialog').dialog();
+        });
+      </script>
 
 </body>
 </html>
