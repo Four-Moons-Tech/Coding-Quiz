@@ -100,21 +100,18 @@ function submitInitials() {
     initial: initial.value,
     score: scoreCounter,
   }
+// var localStorage = localStorage.getItem(playerRecords)
   
-  localStorage.setItem("playerRecords", JSON.stringify(playerRecords));
-  
-  function storeScores() {
+//   if (playerRecords ===null) {
+//     playerRecords = [];
+//   } else {
+//     playerRecords = JSON.parse(localStorage); 
+//   }
+//   playerRecords.push()
 
-    var values = [],
-        keys = Object.keys(localStorage),
-        i = keys.length;
+ localStorage.setItem("playerRecords", JSON.stringify(playerRecords));   
+   
 
-    while ( i-- ) {
-        values.push( localStorage.getItem(keys[i]) );
-    }
-
-    return values;
-}
 
   //renderMessage();
   // var playerRecords = JSON.parse(localStorage.getItem('playerRecords'))
@@ -125,7 +122,6 @@ function submitInitials() {
   //localStorage.setItem('initials', initial.value);
   //var playerRecords = initial.value  +  scoreCounter;
   console.log(playerRecords); 
-  //localStorage.setItem('playerRecords', playerRecords); 
   addScoreItem(playerRecords);
   $(finalScore).hide();
   $(highScores).show();
@@ -138,24 +134,42 @@ function addScoreItem(playerRecords) {
     //add playerRecords score
     //append to my score list
    
-
-    for (var i = 0; i < playerRecords.length; i++) {
-     
+    playerRecords = JSON.parse(localStorage.getItem('playerRecords'))
+    for (var i = 0; i < manyScores.length; i++) {
+     playerRecords = manyScores [i]; 
   
       var li = document.createElement("li");
       li.textContent = playerRecords;
-      li.setAttribute("data-index", playerRecords);
+      li.setAttribute("data-index", i);
 
       scoreList.appendChild(li);
     }
-
-
 }
 
+function init() {
+
+  var storedScores = JSON.parse(localStorage.getItem("manyScores"));
+  if (storedScores !== null) {
+    playerRecords = storedScores;
+  }
+  addScoreItem();
+}
 submitButton.addEventListener('click', function (event) {
   event.preventDefault();
+
+  // if (playerRecords === "") {
+  //   return;
+  // }
+ 
+  manyScores.push(playerRecords);
+  //playerRecords = "";
+ 
   submitInitials();
-  //addScoreItem();
+  addScoreItem();
+
+
+  // submitInitials();
+  // addScoreItem();
 });
 
 //Timer
