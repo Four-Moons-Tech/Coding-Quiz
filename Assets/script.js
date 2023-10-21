@@ -12,8 +12,6 @@
 var quizQuestion = document.querySelectorAll(".quiz-question");
 var startButton = document.querySelector('#start');// var for start button using id
 var secondsLeft;
-// var scoreCounter = 0;
-var numberOfQuestions = 5;
 var question1 = document.getElementById('question1');
 var question2 = document.getElementById('question2');
 var question3 = document.getElementById('question3');
@@ -24,17 +22,14 @@ var finalScore = document.querySelector('.final-score');
 var highScores = document.querySelector('.score-list');
 var timerInterval;
 var submitButton = document.getElementById('submit');
-var initial = document.querySelector('#initials');
-//initial = initial.value; 
-//initialsText=initials.textContent; 
-var scoreCounter = document.querySelector('.score');
-scoreCounter = 0;
-// .textContent;
+var initial = document.querySelector('#initials'); 
+var scoreDisplay = document.querySelector('.score');
+var scoreCounter = 0;
 var scoreList = document.getElementById('high-score-list');
-//yourScore.textContent = count; 
-//var storeScore = count + initials; {
-
-
+var goBackBtn = document.getElementById('goBack');
+var clearBtn = document.getElementById('clear');
+var message = document.querySelectorAll('.message')
+var instruction = document.querySelector('.start-quiz');
 
 
 
@@ -42,12 +37,6 @@ var scoreList = document.getElementById('high-score-list');
 $(document).ready(function () {
   $(quizQuestion).hide()//Hiding all quiz questions classes//
 })
-
-var instruction = document.querySelector('.start-quiz');
-
-//buttonGroup.addEventListener('click', function(event) {
-//if (event.target.classList.contains('child')) {
-//  console.log('Clicked on child element');
 
 
 
@@ -62,15 +51,6 @@ function startQuiz() { //function to start the quiz
   $(question1).show();
 
 }
-//answer.addEventListener('click', )
-
-//finalScore = ''
-// function calcScore(){
-//   if (answertype==='correct'){
-//     finalScore=+20; 
-//   } else finalScore=-20; 
-
-
 
 answer.forEach(function (button) {
   button.addEventListener('click', function (event) {
@@ -79,9 +59,11 @@ answer.forEach(function (button) {
     if (this.getAttribute('data-type') == 'correct') {
       scoreCounter += 20;
       console.log("correct", scoreCounter)
+      message == "Correct!"; 
     } else if (this.getAttribute('data-type') == 'wrong') {
       scoreCounter -= 10
       secondsLeft -= 10
+      message == "Wrong!"
       if (secondsLeft <= 0) {
         clearInterval(timerInterval);
         alert('No time left')
@@ -107,18 +89,44 @@ answer.forEach(function (button) {
       $(question5).hide();
       $(finalScore).show();
       clearInterval(timerInterval);
-
+      scoreDisplay.textContent = scoreCounter;
+      console.log(scoreDisplay.textContent);
     }
   });
 });
 
 function submitInitials() {
-  var playerRecords = JSON.parse(localStorage.getItem('playerRecords'))
-  playerRecords [initial.value]=scoreCounter
+  var playerRecords = {
+    initial: initial.value,
+    score: scoreCounter,
+  }
+  
+  localStorage.setItem("playerRecords", JSON.stringify(playerRecords));
+  
+  function storeScores() {
 
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
 
-  localStorage.setItem('playerRecords', playerRecords);
-  addScoreItem(playerRecords)
+    while ( i-- ) {
+        values.push( localStorage.getItem(keys[i]) );
+    }
+
+    return values;
+}
+
+  //renderMessage();
+  // var playerRecords = JSON.parse(localStorage.getItem('playerRecords'))
+  // playerRecords [initial.value]=scoreCounter
+
+  //scoreCounter = scoreDisplay.textContent; 
+  //localStorage.setItem('score', scoreCounter);
+  //localStorage.setItem('initials', initial.value);
+  //var playerRecords = initial.value  +  scoreCounter;
+  console.log(playerRecords); 
+  //localStorage.setItem('playerRecords', playerRecords); 
+  addScoreItem(playerRecords);
   $(finalScore).hide();
   $(highScores).show();
 }
@@ -129,14 +137,16 @@ function addScoreItem(playerRecords) {
     //create a list item
     //add playerRecords score
     //append to my score list
+   
+
     for (var i = 0; i < playerRecords.length; i++) {
-      //var todo = todos[i];
+     
   
       var li = document.createElement("li");
       li.textContent = playerRecords;
-      li.setAttribute("data-index", i);
+      li.setAttribute("data-index", playerRecords);
 
-      playerRecords.appendChild(li);
+      scoreList.appendChild(li);
     }
 
 
@@ -145,7 +155,7 @@ function addScoreItem(playerRecords) {
 submitButton.addEventListener('click', function (event) {
   event.preventDefault();
   submitInitials();
-  addScoreItem();
+  //addScoreItem();
 });
 
 //Timer
@@ -167,26 +177,24 @@ function setTime() {
 }
 
 
-//answerButtons.addEventListener('click', userInput1)
 
 
+var startOver = function() {
+  $(highScores).hide();
+  $(instruction).show();
+}
+var clearHighScore = function(){
+  $(scoreList).hide();
+  localStorage.clear();
+}
 
+goBackBtn.addEventListener("click", startOver);
+clearBtn.addEventListener('click', clearHighScore);
 
+// var showHighScoreLink =document.getElementsByTagName('a');
 
-
-//resetButton.addEventListener("click", resetGame);
-//firstChoice.addEventListener('click', )
-var message = document.querySelectorAll('.message')
-//var state = message.getAttribute("data-state")
-
-//function displayMessageCorrect() {
-//message = "Correct";
-//state.setAttribute('data-state', 'visible');
-//alert('Correct')
-//}
-
-//function displayMessageWrong() {
-//alert('Wrong')
-//}
-//calculate final score
+// var showHighScore = function(){
+//   $(highScores).show();
+// }
+// showHighScoreLink.addEventListener('click', showHighScore); 
 
