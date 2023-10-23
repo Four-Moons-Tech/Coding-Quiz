@@ -1,14 +1,3 @@
-//hide-show data-question
-//event on click
-//if statement
-//timer
-//list of high scores
-//go back-restart the quiz
-// clear high score - reset the score
-//calculate the score
-//display message correct or wrong
-//wrong answer will penalize your score/time by 10 seconds
-
 var quizQuestion = document.querySelectorAll(".quiz-question");
 var startButton = document.querySelector('#start');// var for start button using id
 var secondsLeft;
@@ -28,14 +17,14 @@ var scoreCounter = 0;
 var scoreList = document.getElementById('high-score-list');
 var goBackBtn = document.getElementById('goBack');
 var clearBtn = document.getElementById('clear');
-var message = document.querySelectorAll('.message')
 var instruction = document.querySelector('.start-quiz');
-
+var message = document.querySelector('#message');
 
 
 
 $(document).ready(function () {
   $(quizQuestion).hide()//Hiding all quiz questions classes//
+  $(message).hide();
 })
 
 
@@ -58,12 +47,12 @@ answer.forEach(function (button) {
     //console.log(event.target)
     if (this.getAttribute('data-type') == 'correct') {
       scoreCounter += 20;
-      console.log("correct", scoreCounter)
-      message == "Correct!"; 
+      console.log("correct", scoreCounter);
+      displayCorrect()
     } else if (this.getAttribute('data-type') == 'wrong') {
       scoreCounter -= 10
       secondsLeft -= 10
-      message == "Wrong!"
+      displayWrong()
       if (secondsLeft <= 0) {
         clearInterval(timerInterval);
         alert('No time left')
@@ -100,28 +89,10 @@ function submitInitials() {
     initial: initial.value,
     score: scoreCounter,
   }
-// var localStorage = localStorage.getItem(playerRecords)
-  
-//   if (playerRecords ===null) {
-//     playerRecords = [];
-//   } else {
-//     playerRecords = JSON.parse(localStorage); 
-//   }
-//   playerRecords.push()
 
  localStorage.setItem("playerRecords", JSON.stringify(playerRecords));   
    
-
-
-  //renderMessage();
-  // var playerRecords = JSON.parse(localStorage.getItem('playerRecords'))
-  // playerRecords [initial.value]=scoreCounter
-
-  //scoreCounter = scoreDisplay.textContent; 
-  //localStorage.setItem('score', scoreCounter);
-  //localStorage.setItem('initials', initial.value);
-  //var playerRecords = initial.value  +  scoreCounter;
-  console.log(playerRecords); 
+  //  console.log(playerRecords); 
   addScoreItem(playerRecords);
   $(finalScore).hide();
   $(highScores).show();
@@ -134,42 +105,31 @@ function addScoreItem(playerRecords) {
     //add playerRecords score
     //append to my score list
    
-    playerRecords = JSON.parse(localStorage.getItem('playerRecords'))
-    for (var i = 0; i < manyScores.length; i++) {
-     playerRecords = manyScores [i]; 
-  
+   var manyScores = JSON.parse(localStorage.getItem('manyScores')) || []
+    console.log(playerRecords)
+    manyScores.push(playerRecords)
+    localStorage.setItem('manyScores', JSON.stringify(manyScores))
+    manyScores.sort((a,b) =>b.score-a.score);
+    console.log(manyScores)
+    for (var i = 0; i < 5; i++) {
+      console.log(manyScores[i])
+      if (manyScores[i] === undefined){
+        return
+      }
+      
+        
+      
       var li = document.createElement("li");
-      li.textContent = playerRecords;
+      li.textContent = manyScores[i].score+' '+manyScores[i].initial 
       li.setAttribute("data-index", i);
 
       scoreList.appendChild(li);
     }
 }
 
-function init() {
-
-  var storedScores = JSON.parse(localStorage.getItem("manyScores"));
-  if (storedScores !== null) {
-    playerRecords = storedScores;
-  }
-  addScoreItem();
-}
 submitButton.addEventListener('click', function (event) {
   event.preventDefault();
-
-  // if (playerRecords === "") {
-  //   return;
-  // }
- 
-  manyScores.push(playerRecords);
-  //playerRecords = "";
- 
   submitInitials();
-  addScoreItem();
-
-
-  // submitInitials();
-  // addScoreItem();
 });
 
 //Timer
@@ -205,10 +165,50 @@ var clearHighScore = function(){
 goBackBtn.addEventListener("click", startOver);
 clearBtn.addEventListener('click', clearHighScore);
 
-// var showHighScoreLink =document.getElementsByTagName('a');
+var displayCorrect = function(){
+  console.log("it works")
+  message.textContent = "Correct!"
+  //message = document.querySelector('#message').style.visibility = "visible";
+  $(message).show()
+  message.textContent = "Correct!"
+  //console.log(message.textContent);
+  setTimeout(function(){
+    $(message).hide()
+  },
+   1000);
+}
 
-// var showHighScore = function(){
-//   $(highScores).show();
-// }
-// showHighScoreLink.addEventListener('click', showHighScore); 
+var displayWrong = function(){
+  $(message).show()
+  message.textContent = "Wrong!"; 
+  console.log("Working");
+  setTimeout(function(){
+    $(message).hide()
+  },
+   1000);
+}
+
+
+
+var showHighScoreLink =document.getElementById('score-list');
+
+var showHighScore = function(){
+ $(highScores).show();
+ $(instruction).hide(); 
+ var manyScores = JSON.parse(localStorage.getItem('manyScores')) || []
+    manyScores.sort((a,b) =>b.score-a.score);
+    console.log(manyScores)
+    for (var i = 0; i < 5; i++) {
+      console.log(manyScores[i])
+      if (manyScores[i] === undefined){
+        return
+      }
+
+      var li = document.createElement("li");
+      li.textContent = manyScores[i].score+' '+manyScores[i].initial 
+      li.setAttribute("data-index", i);
+
+      scoreList.appendChild(li);
+    }}
+ showHighScoreLink.addEventListener('click', showHighScore); 
 
