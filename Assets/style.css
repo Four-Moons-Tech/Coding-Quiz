@@ -72,6 +72,9 @@ textarea {
 }
 #high-score-list {
     background-color: #b7a1d0;
+    margin-left: 500px;
+    margin-right: 500px;
+
 }
 
 label{

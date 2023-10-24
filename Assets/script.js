@@ -1,6 +1,7 @@
-var quizQuestion = document.querySelectorAll(".quiz-question");
-var startButton = document.querySelector('#start');// var for start button using id
+var quizQuestion = document.querySelectorAll(".quiz-question"); //var for all div classes quizQuestion//
+var startButton = document.querySelector('#start');// var for start button using id//
 var secondsLeft;
+//var for each question and answer group
 var question1 = document.getElementById('question1');
 var question2 = document.getElementById('question2');
 var question3 = document.getElementById('question3');
@@ -11,7 +12,7 @@ var finalScore = document.querySelector('.final-score');
 var highScores = document.querySelector('.score-list');
 var timerInterval;
 var submitButton = document.getElementById('submit');
-var initial = document.querySelector('#initials'); 
+var initial = document.querySelector('#initials');
 var scoreDisplay = document.querySelector('.score');
 var scoreCounter = 0;
 var scoreList = document.getElementById('high-score-list');
@@ -21,38 +22,36 @@ var instruction = document.querySelector('.start-quiz');
 var message = document.querySelector('#message');
 
 
-
+//JQuery function to hide all questions and a message on document load//
 $(document).ready(function () {
   $(quizQuestion).hide()//Hiding all quiz questions classes//
-  $(message).hide();
+  $(message).hide();//Hiding Correct/Wrong message
 })
-
-
-
-
-
+//event listener to start the quiz on click//
 startButton.addEventListener("click", startQuiz);
 
 function startQuiz() { //function to start the quiz
   secondsLeft = 45;
-  $(instruction).hide();
+  $(instruction).hide(); //hides instructions
   setTime()
-  $(question1).show();
+  $(question1).show();//shows first question
 
 }
-
+//for each anwer button there is an event listener
 answer.forEach(function (button) {
   button.addEventListener('click', function (event) {
     //console.log(this);
     //console.log(event.target)
+    //if answer button data type is correct
     if (this.getAttribute('data-type') == 'correct') {
-      scoreCounter += 20;
+      scoreCounter += 20;//add 20 points to the score
       console.log("correct", scoreCounter);
-      displayCorrect()
+      displayCorrect() //display correct message function
     } else if (this.getAttribute('data-type') == 'wrong') {
-      scoreCounter -= 10
-      secondsLeft -= 10
+      scoreCounter -= 10 //else decresed score by 20 points 
+      secondsLeft -= 10 // and deduct 20 seconds from the timer
       displayWrong()
+      //stops timer of no time is left
       if (secondsLeft <= 0) {
         clearInterval(timerInterval);
         alert('No time left')
@@ -60,7 +59,7 @@ answer.forEach(function (button) {
       console.log("wrong", scoreCounter, secondsLeft)
       timeEl.setAttribute('timer-count', secondsLeft);
     }
-
+    //hides and shows data based on where the player is during the quiz
     if (this.getAttribute('data-button') == 1) {
       $(instruction).hide();
       $(question1).hide();
@@ -83,16 +82,16 @@ answer.forEach(function (button) {
     }
   });
 });
-
+//function to submit the initials
 function submitInitials() {
+  //player record object
   var playerRecords = {
     initial: initial.value,
     score: scoreCounter,
   }
+  //using JSON.stringify to add the object to local storage
+  localStorage.setItem("playerRecords", JSON.stringify(playerRecords));
 
- localStorage.setItem("playerRecords", JSON.stringify(playerRecords));   
-   
-  //  console.log(playerRecords); 
   addScoreItem(playerRecords);
   $(finalScore).hide();
   $(highScores).show();
@@ -100,31 +99,25 @@ function submitInitials() {
 
 
 function addScoreItem(playerRecords) {
-  //for every key in my object 
-    //create a list item
-    //add playerRecords score
-    //append to my score list
-   
-   var manyScores = JSON.parse(localStorage.getItem('manyScores')) || []
-    console.log(playerRecords)
-    manyScores.push(playerRecords)
-    localStorage.setItem('manyScores', JSON.stringify(manyScores))
-    manyScores.sort((a,b) =>b.score-a.score);
-    console.log(manyScores)
-    for (var i = 0; i < 5; i++) {
-      console.log(manyScores[i])
-      if (manyScores[i] === undefined){
-        return
-      }
-      
-        
-      
-      var li = document.createElement("li");
-      li.textContent = manyScores[i].score+' '+manyScores[i].initial 
-      li.setAttribute("data-index", i);
-
-      scoreList.appendChild(li);
+  //using JSON.parse to get scores from the loc al storage
+  var manyScores = JSON.parse(localStorage.getItem('manyScores')) || []
+  //adding player scores to the array of saved scores in the local storage
+  manyScores.push(playerRecords)
+  localStorage.setItem('manyScores', JSON.stringify(manyScores))
+  manyScores.sort((a, b) => b.score - a.score); //sorting scores from highest to lowest
+  console.log(manyScores)
+  for (var i = 0; i < 5; i++) {
+    console.log(manyScores[i])
+    if (manyScores[i] === undefined) {//stopping the loop if there are no previously saved scores in the local storage
+      return
     }
+    //creating element li to hold the score and the initial
+    var li = document.createElement("li");
+    li.textContent = manyScores[i].score + '   ' + manyScores[i].initial
+    li.setAttribute("data-index", i);
+    //appending li to the scorelist
+    scoreList.appendChild(li); 
+  }
 }
 
 submitButton.addEventListener('click', function (event) {
@@ -134,7 +127,6 @@ submitButton.addEventListener('click', function (event) {
 
 //Timer
 var timeEl = document.querySelector('.timer-count')
-
 function setTime() {
   timerInterval = setInterval(function () {
     secondsLeft--;
@@ -150,65 +142,61 @@ function setTime() {
   }, 1000);
 }
 
-
-
-
-var startOver = function() {
+var startOver = function () {
   $(highScores).hide();
   $(instruction).show();
 }
-var clearHighScore = function(){
+var clearHighScore = function () {
   $(scoreList).hide();
   localStorage.clear();
 }
-
+//event listener on click to go back to the start of the quiz
 goBackBtn.addEventListener("click", startOver);
+//event listener on click to clear highscores
 clearBtn.addEventListener('click', clearHighScore);
 
-var displayCorrect = function(){
-  console.log("it works")
+var displayCorrect = function () {
   message.textContent = "Correct!"
-  //message = document.querySelector('#message').style.visibility = "visible";
   $(message).show()
-  message.textContent = "Correct!"
-  //console.log(message.textContent);
-  setTimeout(function(){
+ 
+  setTimeout(function () {
     $(message).hide()
   },
-   1000);
+    1000);
 }
 
-var displayWrong = function(){
+var displayWrong = function () {
   $(message).show()
-  message.textContent = "Wrong!"; 
-  console.log("Working");
-  setTimeout(function(){
+  message.textContent = "Wrong!";
+  //hides message after 1 second
+  setTimeout(function () {
     $(message).hide()
   },
-   1000);
+    1000);
 }
 
 
 
-var showHighScoreLink =document.getElementById('score-list');
+var showHighScoreLink = document.getElementById('score-list');
+//shows the list of high scores
+var showHighScore = function () {
+  $(highScores).show();
+  $(instruction).hide();
+  var manyScores = JSON.parse(localStorage.getItem('manyScores')) || []
+  manyScores.sort((a, b) => b.score - a.score);
+  console.log(manyScores)
+  for (var i = 0; i < 5; i++) {
+    console.log(manyScores[i])
+    if (manyScores[i] === undefined) {
+      return
+    }
 
-var showHighScore = function(){
- $(highScores).show();
- $(instruction).hide(); 
- var manyScores = JSON.parse(localStorage.getItem('manyScores')) || []
-    manyScores.sort((a,b) =>b.score-a.score);
-    console.log(manyScores)
-    for (var i = 0; i < 5; i++) {
-      console.log(manyScores[i])
-      if (manyScores[i] === undefined){
-        return
-      }
+    var li = document.createElement("li");
+    li.textContent = manyScores[i].score + ' ' + manyScores[i].initial
+    li.setAttribute("data-index", i);
 
-      var li = document.createElement("li");
-      li.textContent = manyScores[i].score+' '+manyScores[i].initial 
-      li.setAttribute("data-index", i);
-
-      scoreList.appendChild(li);
-    }}
- showHighScoreLink.addEventListener('click', showHighScore); 
+    scoreList.appendChild(li);
+  }
+}
+showHighScoreLink.addEventListener('click', showHighScore);
 
